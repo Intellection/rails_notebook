@@ -3,7 +3,6 @@ require 'multi_json'
 
 module RailsNotebook
 
-
   class Command
 
     def initialize
