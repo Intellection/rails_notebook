@@ -5,6 +5,7 @@ class RouteNode
 		_verb ? @verbs = [_verb] : @verbs = []
 		@controller = _controller
 		_action ? @actions = [_action] : @actions = []
+		@countChildrenNodes = 0
 		@childrenNodes = []
 	end
 
@@ -42,6 +43,10 @@ class RouteNode
   		@childrenNodes
 	end
 
+	def getCountChildrenNodes
+		@countChildrenNodes
+	end
+
 	def hasRoute( uri_mapping )
 		@childrenNodes.each do |childNode|
 			if childNode == uri_mapping 
@@ -57,6 +62,15 @@ class RouteNode
 
 	def ==( uri_mapping )
     	self.uriPattern == uri_mapping
+  	end
+
+  	def countChildrenNodes( count )
+    	@childrenNodes.each do |child|
+    		count = count + child.countChildrenNodes(0)
+    	end
+    	@countChildrenNodes = count
+    	count += 1
+    	return count
   	end
 
   	def printNode
