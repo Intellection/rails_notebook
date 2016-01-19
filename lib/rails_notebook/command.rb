@@ -47,7 +47,8 @@ module RailsNotebook
     end
 
     def profile_path
-      File.expand_path(".." , `ipython profile locate default`.strip)
+      `ipython locate rails_notebook`.strip
+      #File.expand_path(".." , `ipython locate rails_notebook`.strip)
     end
 
     def static_path
