@@ -1,12 +1,13 @@
 class RouteNode
 
-	def initialize( _uriPattern , _verb , _controller , _action )
+	def initialize( _uriPattern , _verb , _controller , _action, _nodeUri )
 		@uriPattern = _uriPattern
 		_verb ? @verbs = [_verb] : @verbs = []
 		@controller = _controller
 		_action ? @actions = [_action] : @actions = []
 		@countChildrenNodes = 0
 		@childrenNodes = []
+		@nodeUri = _nodeUri
 	end
 	def updateParams( _verb , _controller , _action )
 		@verbs << _verb unless _verb.nil?
@@ -93,29 +94,26 @@ class RouteTree
             	elsif thisNode.hasRoute( uri_mapping )
             		thisNode.hasRoute( uri_mapping ).updateParams( _node.verb , _node.controller , _node.action )
             	else 
-            		child = RouteNode.new( uri_mapping , _node.verb , _node.controller , _node.action )
+            		child = RouteNode.new( uri_mapping , _node.verb , _node.controller , _node.action, uri )
             		thisNode.insertChild( child )
             	end
             elsif thisNode.hasRoute( uri_mapping ) # node exists so walk the tree
             	thisNode = thisNode.hasRoute( uri_mapping )
-            elsif thisNode.uriPattern == uri_mapping # already there
-            	thisNode.updateParams( _node.verb , _node.controller , _node.action )
+            elsif thisNode.uriPattern == uri_mapping # already there so do nothing
+            	#thisNode.updateParams( _node.verb , _node.controller , _node.action )
             else
-            	child = RouteNode.new( uri_mapping , nil, nil , nil )
+            	child = RouteNode.new( uri_mapping , nil, nil , nil, uri )
             	thisNode.insertChild( child )
             	thisNode = child
             end
         end
 	end
-
 	def removeNode( _node )
 		puts "removing node"
 	end
-
 	def getRoot
 		@headNode
 	end
-
 	def printTree
 		@headNode.printNode
 	end	
