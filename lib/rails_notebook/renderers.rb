@@ -13,8 +13,6 @@ module RailsNotebook
             HTML
         end
 
-        #Note: I edited the /Users/nickhoernle/.ipython/kernels/rails_notebook kernel.js file
-        # to import the files "d3.min.js" and "custom.js"
         def self.render_routes( tree )
             <<-HTML
             <svg width=960 height=600><g/></svg>
@@ -105,6 +103,15 @@ module RailsNotebook
             </script>
             HTML
         end
+
+        def self.render_profiling( obj )
+            <<-HTML
+            <script>
+                var profile = #{MultiJson.dump( obj )};
+                console.log( profile );
+            </script>
+            HTML
+        end
     end
 
     IRuby::Display::Registry.type { Hash }
@@ -123,6 +130,11 @@ module RailsNotebook
         Renderers.json_view( Serializers.serialize(obj) )
     end
 
+    IRuby::Display::Registry.type { RubyProf::GraphPrinter }
+    IRuby::Display::Registry.format("text/html") do |obj|
+        printer = RubyProf::GraphPrinter.new(obj)
+        Renderers.render_profiling( printer )
+    end
 
     IRuby::Display::Registry.type { ActionDispatch::Routing::RouteSet }
     IRuby::Display::Registry.format("text/html") do |route_set|
