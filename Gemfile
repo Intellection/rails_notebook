@@ -15,8 +15,10 @@ gem 'rspec-rails', group: [:development, :test]
 # To use a debugger
 gem 'byebug', group: [:development, :test]
 
-gem 'pry-byebug', group: [:development, :test]
+#gem 'pry-byebug', group: [:development, :test]
 
-gem 'ruby-prof'
-gem 'pry'
+#gem 'fast_stack'
+gem 'stackprof'
+#gem 'pry'
+
 gem 'rbczmq'

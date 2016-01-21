@@ -15,14 +15,13 @@ module RailsNotebook
 
         def self.render_routes( tree )
             <<-HTML
-            <svg width=960 height=600><g/></svg>
+            <svg id="hash-#{tree.object_id}" width=960 height=600><g/></svg>
             <!--<script src="/kernelspecs/rails_notebook/renderRoutes.js"></script>-->
             <script>
             require(["jquery", "/kernelspecs/rails_notebook/jquery.tipsy.js", "/kernelspecs/rails_notebook/dagre-d3.js", "/kernelspecs/rails_notebook/d3.js"], 
                     function ( $, tipsy , dagreD3 , d3 ) {
                 var routeTree = #{MultiJson.dump( tree )};
                 var g = new dagreD3.graphlib.Graph().setGraph({}).setDefaultEdgeLabel(function() { return {}; });
-                console.log( routeTree );
 
                 // Rendering the graph
                 var buildOutput = function myself( g, thisNode, nodeNumber, i ){
@@ -57,7 +56,7 @@ module RailsNotebook
                 });
                 
                 // Set up an SVG group so that we can translate the final graph.
-                var svg     = d3.select("svg"),
+                var svg     = d3.select("#hash-#{tree.object_id}"),
                     inner   = svg.select("g");
 
                 // Set up zoom support
@@ -104,24 +103,25 @@ module RailsNotebook
             HTML
         end
 
-        def self.render_profiling( obj )
+        def self.html_flamechart( data )
             <<-HTML
+            <div class=flamechart id="#{data.object_id}" width="960" height="600"></div>
+            <script src="/kernelspecs/rails_notebook/flamechart.js"/>
             <script>
-                var profile = #{MultiJson.dump( obj )};
-                console.log( profile );
+                FLAMECHART.generateFlamechart( #{MultiJson.dump(data)} , document.getElementById(#{data.object_id} ));
             </script>
             HTML
         end
     end
 
     IRuby::Display::Registry.type { Hash }
-    IRuby::Display::Registry.format("text/html") do |obj| 
-        Renderers.json_view( obj )
+    IRuby::Display::Registry.format("text/html") do |hash| 
+        Renderers.json_view( hash )
     end
 
 
     IRuby::Display::Registry.type { Array }
-    IRuby::Display::Registry.format("text/html") do |obj| 
+    IRuby::Display::Registry.format("text/html") do |array| 
         # Let ruby do the heavy lifting
     end
 
@@ -130,11 +130,15 @@ module RailsNotebook
         Renderers.json_view( Serializers.serialize(obj) )
     end
 
-    IRuby::Display::Registry.type { RubyProf::GraphPrinter }
-    IRuby::Display::Registry.format("text/html") do |obj|
-        printer = RubyProf::GraphPrinter.new(obj)
-        Renderers.render_profiling( printer )
+    IRuby::Display::Registry.type { Profiler::Profile }
+    IRuby::Display::Registry.format("text/html") do |profiledData|
+        Renderers.html_flamechart( profiledData )
     end
+
+    # IRuby::Display::Registry.type { RubyProf::Profile }
+    # IRuby::Display::Registry.format("text/html") do |profiledData|
+    #     profiledData.inspect
+    # end
 
     IRuby::Display::Registry.type { ActionDispatch::Routing::RouteSet }
     IRuby::Display::Registry.format("text/html") do |route_set|
