@@ -124,6 +124,7 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    ruby-prof (0.15.9)
     slop (3.6.0)
     sprockets (3.5.1)
       concurrent-ruby (~> 1.0)
@@ -148,7 +149,8 @@ DEPENDENCIES
   rails_notebook!
   rbczmq
   rspec-rails
+  ruby-prof
   sqlite3
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

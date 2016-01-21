@@ -3,7 +3,6 @@ require 'multi_json'
 
 module RailsNotebook
 
-
   class Command
 
     def initialize
@@ -31,11 +30,32 @@ module RailsNotebook
       check_registered_kernel
       change_working_dir
 
+      create_static_symlink!
+
       Kernel.exec('ipython', 'notebook')
     end
 
-
     private
+
+    #================================= For Symlink
+    def create_static_symlink!
+      src, dst = static_path, File.join(profile_path, '/kernels/rails_notebook')
+      puts src
+      puts dst
+      FileUtils.rm_r dst
+      File.symlink src, dst
+    end
+
+    def profile_path
+      `ipython locate rails_notebook`.strip
+      #File.expand_path(".." , `ipython locate rails_notebook`.strip)
+    end
+
+    def static_path
+      File.join(File.dirname(__FILE__), "assets")
+    end
+    #================================= For Symlink
+
 
     def change_working_dir
       working_dir = File.join(Rails.root, "notebooks")
