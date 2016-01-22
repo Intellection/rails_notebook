@@ -17,7 +17,6 @@ gem 'byebug', group: [:development, :test]
 
 #gem 'pry-byebug', group: [:development, :test]
 
-#gem 'fast_stack'
 gem 'stackprof'
 #gem 'pry'
 
