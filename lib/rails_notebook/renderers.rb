@@ -106,9 +106,10 @@ module RailsNotebook
         def self.html_flamechart( data )
             <<-HTML
             <div class=flamechart id="#{data.object_id}" width="960" height="600"></div>
-            <script src="/kernelspecs/rails_notebook/flamechart.js"/>
+            <link rel="stylesheet" type="text/css" href="/kernelspecs/rails_notebook/renderRoutes.css">
+            <script src="/kernelspecs/rails_notebook/rails_notebook.js"/>
             <script>
-                FLAMECHART.generateFlamechart( #{MultiJson.dump(data)} , document.getElementById(#{data.object_id} ));
+                RAILS_NOTEBOOK.generateFlamechart( #{MultiJson.dump(data)} , document.getElementById(#{data.object_id} ));
             </script>
             HTML
         end
