@@ -35,3 +35,21 @@ h3 {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
 	font-size: 18px;
 }
+
+table {
+  border: none;
+}
+
+table.Tsutable{
+     border-collapse:collapse;
+}
+
+table.Tsutable td{
+    border:none;
+    outline:none;
+}
+
+table.Tsutable tr{
+    border:none;
+    outline:none;
+}

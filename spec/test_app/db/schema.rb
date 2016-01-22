@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114112600) do
+ActiveRecord::Schema.define(version: 20160122142934) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -24,10 +24,54 @@ ActiveRecord::Schema.define(version: 20160114112600) do
     t.string   "commenter"
     t.text     "body"
     t.integer  "article_id"
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "comments", ["article_id"], name: "index_comments_on_article_id"
+  add_index "comments", ["customer_id"], name: "index_comments_on_customer_id"
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "surname"
+    t.string   "phoneNum"
+    t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "comments", ["article_id"], name: "index_comments_on_article_id"
+  create_table "invoices", force: :cascade do |t|
+    t.string   "description"
+    t.string   "price"
+    t.integer  "order_id"
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id"
+  add_index "invoices", ["order_id"], name: "index_invoices_on_order_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "order_date"
+    t.string   "status"
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "quantity"
+    t.integer  "discount"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "products", ["order_id"], name: "index_products_on_order_id"
 
 end
