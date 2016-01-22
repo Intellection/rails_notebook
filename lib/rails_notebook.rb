@@ -7,6 +7,7 @@ require "rails_notebook/renderers"
 require "rails_notebook/serializers"
 require "rails_notebook/route"
 require "rails_notebook/table"
+require "rails_notebook/profiler"
 
 module RailsNotebook
 end

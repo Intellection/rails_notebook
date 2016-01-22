@@ -15,9 +15,11 @@ Gem::Specification.new do |s|
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.require_paths = ["lib/rails_notebook"]
+
 
   s.add_dependency "rails", "~> 4.2.5"
   s.add_dependency "iruby"
-
+  s.add_development_dependency "fast_stack"
   s.add_development_dependency "sqlite3"
 end

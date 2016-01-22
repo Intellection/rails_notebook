@@ -25,9 +25,9 @@ text {
 
 table, th, td {
 	font-size: 16px;
-    border: 2px solid white;
-    border-collapse: collapse;
-    padding: 8px;
+  border: 2px solid white;
+  border-collapse: collapse;
+  padding: 8px;
 }
 
 h3 {
@@ -53,3 +53,32 @@ table.Tsutable tr{
     border:none;
     outline:none;
 }
+
+/*CSS for the flamechart*/
+.job_chart .chart:hover {
+  cursor: pointer;
+}
+
+.job_chart .axis text {
+  font-size: 0.85em;
+}
+
+.job_chart .axis path,
+.job_chart .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.table.table-striped{
+  border-collapse: collapse;
+  margin:2px;
+}
+
+.table.table-striped tr, .table.table-striped td , .table.table-striped th{
+  font-size: 12px;
+  padding: 2px 4px 2px 4px;
+}
+
+.table.table-striped tr:nth-child(even) {background: #e6e6e6}
+.table.table-striped tr:nth-child(odd)  {background: #f2f2f2}
