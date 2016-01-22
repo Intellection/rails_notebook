@@ -36,6 +36,23 @@ h3 {
 	font-size: 18px;
 }
 
+table {
+  border: none;
+}
+
+table.Tsutable{
+     border-collapse:collapse;
+}
+
+table.Tsutable td{
+    border:none;
+    outline:none;
+}
+
+table.Tsutable tr{
+    border:none;
+    outline:none;
+}
 
 /*CSS for the flamechart*/
 .job_chart .chart:hover {
@@ -65,4 +82,3 @@ h3 {
 
 .table.table-striped tr:nth-child(even) {background: #e6e6e6}
 .table.table-striped tr:nth-child(odd)  {background: #f2f2f2}
-
