@@ -4,10 +4,21 @@ module RailsNotebook
 
         def self.json_view( obj )
             <<-HTML
-            <div id="hash-#{obj.object_id}"></div>
+            <div id="json-#{obj.object_id}"></div>
             <script>
                 require(["jquery", "/kernelspecs/rails_notebook/jquery.jsonview.js"], function ($, jsonview) {
-                    $("#hash-#{obj.object_id}").JSONView( #{MultiJson.dump(obj)} );
+                    $("#json-#{obj.object_id}").JSONView( #{MultiJson.dump(obj)} );
+                });
+            </script>
+            HTML
+        end
+
+        def self.pretty_print_json( json )
+            <<-HTML
+            <div id="json-#{json.object_id}"></div>
+            <script>
+                require(["jquery", "/kernelspecs/rails_notebook/jquery.jsonview.js"], function ($, jsonview) {
+                    $("#json-#{json.object_id}").JSONView( #{json} );
                 });
             </script>
             HTML
@@ -57,6 +68,15 @@ module RailsNotebook
     IRuby::Display::Registry.type { Array }
     IRuby::Display::Registry.format("text/html") do |array| 
         # Let rails do the heavy lifting
+    end
+
+    IRuby::Display::Registry.type { String }
+    IRuby::Display::Registry.format("text/html") do |string| 
+        if string[0] == "{" && string[-1] == "}" 
+            Renderers.pretty_print_json( string )
+        else
+            #render the string normally
+        end
     end
 
     IRuby::Display::Registry.type { Rails.application }
