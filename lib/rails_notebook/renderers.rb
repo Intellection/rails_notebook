@@ -153,6 +153,7 @@ module RailsNotebook
     IRuby::Display::Registry.format("text/html") do |obj|
         columnNames = []
         tableData = []
+        tableData.push(obj.name)
         obj.columns.each do |column|
             columnNames.push(column.name)
         end
