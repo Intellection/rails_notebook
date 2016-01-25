@@ -41,16 +41,16 @@ table {
   border: none;
 }
 
-table.Tsutable{
+table.schemaTable{
      border-collapse:collapse;
 }
 
-table.Tsutable td{
+table.schemaTable td{
     border:none;
     outline:none;
 }
 
-table.Tsutable tr{
+table.schemaTable tr{
     border:none;
     outline:none;
 }

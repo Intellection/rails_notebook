@@ -57,6 +57,17 @@ module RailsNotebook
             HTML
         end
 
+        def self.render_table_data( tableData )
+        <<-HTML
+            <svg id="schema-#{tableData.object_id}" width=960 height=600><g/></svg>
+            <script>
+                require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
+                    railsNB.renderTableData( #{MultiJson.dump(tableData)} , document.getElementById( "schema-#{tableData.object_id}" ) );
+                });
+            </script>
+            HTML
+        end
+
     end
 
     IRuby::Display::Registry.type { Hash }
@@ -135,14 +146,26 @@ module RailsNotebook
             tables.push(Table.new(table_name , columnsTemp , arrowsTo ))
         end # end iterating through tables
 
-
-        #tables.each do |table|
-            #table.printTable
-        #end
-
-        # Lets first draw some rectangles for the table names
         Renderers.render_schema( tables ) # Parses the array of tables to Javascript for rendering
-
     end
+
+    IRuby::Display::Registry.type { ActiveRecord::Relation}
+    IRuby::Display::Registry.format("text/html") do |obj|
+        columnNames = []
+        tableData = []
+        obj.columns.each do |column|
+            columnNames.push(column.name)
+        end
+        columnNames.each do |index|
+            tempValues = []
+            tempValues.push(index)
+            obj.each do |row|
+                tempValues.push(row[index])
+            end
+            tableData.push(tempValues)
+        end
+        puts tableData.to_a
+        Renderers.render_table_data( tableData )
+    end # DatabaseQueries
 
 end
