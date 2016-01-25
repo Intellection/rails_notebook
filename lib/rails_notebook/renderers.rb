@@ -107,9 +107,12 @@ module RailsNotebook
             <<-HTML
             <div class=flamechart id="#{data.object_id}" width="960" height="600"></div>
             <link rel="stylesheet" type="text/css" href="/kernelspecs/rails_notebook/renderRoutes.css">
-            <script src="/kernelspecs/rails_notebook/rails_notebook.js"/>
             <script>
-                RAILS_NOTEBOOK.generateFlamechart( #{MultiJson.dump(data)} , document.getElementById(#{data.object_id} ));
+                require(["/kernelspecs/rails_notebook/rails_notebook.js", "/kernelspecs/rails_notebook/d3.js"], function ( railsNB , d3) {
+                    console.log( railsNB );
+                    console.log( d3 );
+                    //railsNB.generateFlamechart( #{MultiJson.dump(data)}, document.getElementById(#{data.object_id} ));
+                });
             </script>
             HTML
         end
