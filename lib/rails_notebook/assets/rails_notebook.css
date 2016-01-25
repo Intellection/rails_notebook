@@ -1,0 +1,85 @@
+/* This sets the color for "TK" nodes to a light blue green. */
+g.type-hasDisplay > rect {
+  fill: #b3ffb3;
+}
+g.type-noDisplay > rect {
+  fill: #efeff5;
+}
+
+text {
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+  font-size: 14px;
+}
+
+.node rect {
+  stroke: #999;
+  fill: #fff;
+  stroke-width: 1.5px;
+}
+
+.edgePath path {
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+
+table, th, td {
+	font-size: 16px;
+  border: 2px solid white;
+  border-collapse: collapse;
+  padding: 8px;
+}
+
+h3 {
+	font-weight: 300;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+	font-size: 18px;
+}
+
+/*Render Schema Table*/
+table {
+  border: none;
+}
+
+table.Tsutable{
+     border-collapse:collapse;
+}
+
+table.Tsutable td{
+    border:none;
+    outline:none;
+}
+
+table.Tsutable tr{
+    border:none;
+    outline:none;
+}
+
+/*CSS for the flamechart*/
+.job_chart .chart:hover {
+  cursor: pointer;
+}
+
+.job_chart .axis text {
+  font-size: 0.85em;
+}
+
+.job_chart .axis path,
+.job_chart .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.table.table-striped{
+  border-collapse: collapse;
+  margin:2px;
+}
+
+.table.table-striped tr, .table.table-striped td , .table.table-striped th{
+  font-size: 12px;
+  padding: 2px 4px 2px 4px;
+}
+
+.table.table-striped tr:nth-child(even) {background: #e6e6e6}
+.table.table-striped tr:nth-child(odd)  {background: #f2f2f2}
