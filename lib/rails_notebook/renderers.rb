@@ -84,6 +84,7 @@ module RailsNotebook
                 routeTree.insertNode( routeNode )
             end
         end
+        # routeTree.printTree()
         Renderers.render_routes( routeTree )
     end
 
