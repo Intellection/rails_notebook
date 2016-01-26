@@ -4,20 +4,19 @@ require "json"
 
 module Profiler
     def self.profile(filename=nil, opts = {})
+        backtraces = nil;
         fidelity = opts[:fidelity]  || 0.05
-        backtraces = StackProfSampler.collect( fidelity ) do yield end # I think the sampling rate is 0.05ms -> work with that
-        staticLocations = caller_locations
-        Profiler::Profile.new( Profiler::generate_data( backtraces , staticLocations ) , fidelity )
+        backtraces = StackProfSampler.collect( fidelity ) do yield end
+        Profiler::Profile.new( Profiler::generate_data( backtraces ) , fidelity )
     end
 
-    def self.generate_data( stacks , staticLocations )
+    def self.generate_data( stacks )
         table = []
         prev = []
 
         # a 2d array makes collapsing easy
         stacks.each_with_index do |stack, pos|
             next unless stack
-            #stack = ( stack - staticLocations ) || (staticLocations - stack )
             col = []
 
             stack.reverse.map{|r| r.to_s}.each_with_index do |frame, i|
@@ -85,7 +84,13 @@ module Profiler
                     frame = result[:frames][i]
                     frame = "#{frame[:file]}:#{frame[:line]}:in `#{frame[:name]}'"
                     # puts frame
-                    if frame.to_s =~ /iruby/ && !( frame.to_s =~ /IRuby::/ )
+                    #if frame.to_s =~ /iruby/ && !( frame.to_s =~ /IRuby::/ )
+                    s = frame.to_s
+                    if !( s =~ /application.rb/ ) &&
+                            !( s =~ /Rake::Application/) &&
+                            !( s =~ /task.rb/) &&
+                            !( s =~ /kernel.rb/) &&
+                            !( s =~ /profiler.rb/)
                         stack << frame.to_s
                     end
                     length -= 1

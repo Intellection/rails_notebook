@@ -37,10 +37,10 @@ module RailsNotebook
 
         def self.html_flamechart( data )
             <<-HTML
-            <div class=flamechart id="#{data.object_id}" width="960" height="600"></div>
+            <div class=flamechart id="flamechart-#{data.object_id}" width="960" height="600"></div>
             <script>
                 require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
-                    railsNB.renderFlamechart( #{MultiJson.dump(data)}, document.getElementById(#{data.object_id} ));
+                    railsNB.renderFlamechart( #{MultiJson.dump(data)}, document.getElementById("flamechart-#{data.object_id}" ));
                 });
             </script>
             HTML
@@ -86,6 +86,7 @@ module RailsNotebook
 
     IRuby::Display::Registry.type { Profiler::Profile }
     IRuby::Display::Registry.format("text/html") do |profiledData|
+        #puts profiledData.inspect
         Renderers.html_flamechart( profiledData )
     end
 
