@@ -145,7 +145,7 @@ module RailsNotebook
             end # end iterating through columns in tables
             tables.push(Table.new(table_name , columnsTemp , arrowsTo ))
         end # end iterating through tables
-
+        tables = tables.sort_by { |x| x.arrowsTo.length }
         Renderers.render_schema( tables ) # Parses the array of tables to Javascript for rendering
     end
 
