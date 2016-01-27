@@ -26,7 +26,7 @@ module RailsNotebook
 
         def self.render_routes( tree )
             <<-HTML
-            <svg id="routes-#{tree.object_id}" width=960 height=600><g/></svg>
+            <svg id="routes-#{tree.object_id}" width="960" height="600"><g/></svg>
             <script>
                 require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
                     railsNB.renderRoutes( #{MultiJson.dump(tree)} , document.getElementById( "routes-#{tree.object_id}" ) );
@@ -48,7 +48,7 @@ module RailsNotebook
 
         def self.render_schema( tables )
         <<-HTML
-            <svg id="schema-#{tables.object_id}" width=960 height=600><g/></svg>
+            <svg id="schema-#{tables.object_id}" width="960" height="600"><g/></svg>
             <script>
                 require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
                     railsNB.renderSchema( #{MultiJson.dump(tables)} , document.getElementById( "schema-#{tables.object_id}" ) );
@@ -59,10 +59,10 @@ module RailsNotebook
 
         def self.render_table_data( tableData )
         <<-HTML
-            <svg id="schema-#{tableData.object_id}" width=960 height=600><g/></svg>
+            <div id="#{tableData.object_id}"><div>
             <script>
                 require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
-                    railsNB.renderTableData( #{MultiJson.dump(tableData)} , document.getElementById( "schema-#{tableData.object_id}" ) );
+                    railsNB.renderTableData( #{MultiJson.dump(tableData)} , document.getElementById( "#{tableData.object_id}" ) );
                 });
             </script>
             HTML
@@ -166,7 +166,6 @@ module RailsNotebook
             end
             tableData.push(tempValues)
         end
-        puts tableData.to_a
         Renderers.render_table_data( tableData )
     end # DatabaseQueries
 
