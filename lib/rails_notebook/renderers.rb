@@ -38,11 +38,7 @@ module RailsNotebook
 
     IRuby::Display::Registry.type { Hash }
     IRuby::Display::Registry.format("text/html") do |hash| 
-        if (hash.values.all? {|i| i.is_a?(Numeric) })
-            Renderers.render_html( hash , "renderBarChart" )
-        else
-            Renderers.json_view( hash )
-        end
+        Renderers.json_view( hash )
     end
 
     IRuby::Display::Registry.type { Array }
@@ -136,5 +132,10 @@ module RailsNotebook
         end
         Renderers.render_html( tableData, "renderTableData" )
     end # DatabaseQueries
+
+    IRuby::Display::Registry.type { SchemaTable::ChartRenderer }
+    IRuby::Display::Registry.format("text/html") do |obj|
+        Renderers.render_html( obj.data , "renderBarChart" )
+    end
 
 end
