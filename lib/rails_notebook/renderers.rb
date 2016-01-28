@@ -29,6 +29,7 @@ module RailsNotebook
             <div id="railsnb-#{object.object_id}"></div>
             <script>
             require(["/kernelspecs/rails_notebook/rails_notebook.js"] , function ( railsNB ) {
+                console.log( railsNB );
                 railsNB.#{functionName}( #{MultiJson.dump(object)} , document.getElementById( "railsnb-#{object.object_id}" ) );
             }); 
             </script>
