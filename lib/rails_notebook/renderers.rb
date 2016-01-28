@@ -142,7 +142,7 @@ module RailsNotebook
         columnNames.each do |index|
             tempValues = []
             tempValues.push(index)
-            obj.each do |row|
+            obj[0,10].each do |row| # Display only the first ten rows
                 tempValues.push(row[index])
             end
             tableData.push(tempValues)
