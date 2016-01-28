@@ -1,6 +1,6 @@
-## Rails_notebook
+## Rails notebook
 
-TODO: At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+Welcome to Rails Notebook! Rails Notebook is a web-based notebook environment for interactive computing, specifically geared for Ruby on Rails.
 
 ## Installation
 
@@ -12,28 +12,54 @@ And then execute:
 
 	$ bundle
 
-TODO: Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+Make sure there is no ~/Library/Jupyter/kernels directory. If there is, make sure this is removed before running.
 
+Please ensure that the following dependencies are installed prior to running the Rails Notebook.
 
-Make sure there is no ~/Library/Jupyter/kernels directory. If there is, make sure this is removed before running. 
+1) ipython - 4.0.2
+
+2) Rails - 4.2.5
+
+3) conda 3.19.0
+
+4) ruby 2.2.1p85
+
+5) sqlite 3.9.2
+
+6) Anaconda 2.1.0
+
+7) Python 2.7.11 (comes with Anaconda 2.1.0)
 
 Run to start the notebook navigate to the root of the Rails application and run:
 
     rake rails_notebook
 
+Also ensure that the notebook is marked as a "Trusted" under File > Trusted Notebook. You may be prompted to restart the notebook.
 
 ## Why does Rails_notebook exist?
 
-TODO: A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
-
+The Rails Notebook is a web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
 ## Core aims of Rails_notebook
 
-Visualization of: Database queries, Database Schema, Flame charts, Routes, Barcharts and more to come.
+Visualization of: 
+
+1) Database queries
+
+2) Database Schema
+
+3) Flame charts
+
+4) Routes
+
+5) Barcharts 
+
+... and more to come.
+
 
 
 ## Contributors
 
-@Nick, @Tsu-Shiuan
+@Brendon, @Nick, @Tsu-Shiuan
 
 ## License
 
