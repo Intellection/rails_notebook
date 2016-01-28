@@ -29,30 +29,17 @@ module RailsNotebook
             <div id="railsnb-#{object.object_id}"></div>
             <script>
             require(["/kernelspecs/rails_notebook/rails_notebook.js"] , function ( railsNB ) {
-                console.log( railsNB );
                 railsNB.#{functionName}( #{MultiJson.dump(object)} , document.getElementById( "railsnb-#{object.object_id}" ) );
             }); 
             </script>
             HTML
         end
-
-        def self.render_bar_chart( hash )
-        <<-HTML
-            <svg id="#{hash.object_id}" width="960" height="600"><g/></svg>
-            <script>
-                require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
-                    railsNB.renderBarChart( #{MultiJson.dump(hash)} , document.getElementById( "#{hash.object_id}" ) );
-                });
-            </script>
-            HTML
-        end
-
     end
 
     IRuby::Display::Registry.type { Hash }
     IRuby::Display::Registry.format("text/html") do |hash| 
         if (hash.values.all? {|i| i.is_a?(Numeric) })
-            Renderers.render_bar_chart ( hash )
+            Renderers.render_html( hash , "renderBarChart" )
         else
             Renderers.json_view( hash )
         end

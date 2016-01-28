@@ -21,15 +21,16 @@ text {
   color: black;
 }
 
+
+
 /* Rails.applicaiton.routes*/
 g.type-hasDisplay > rect {
   fill: #b3ffb3;
 }
 g.type-noDisplay > rect {
-  fill: #efeff5;
+  fill: #eee;
 }
 
-/*Tipsy for routes*/
 table, th, td {
 	font-size: 16px;
   border: 2px solid white;
@@ -37,10 +38,10 @@ table, th, td {
   padding: 8px;
 }
 
-h3 {
-	font-weight: 300;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
-	font-size: 18px;
+.toolTipTable h4 {
+  font-size: 16px;
+  font-weight:normal;
+  text-align: center;
 }
 
 
@@ -49,8 +50,8 @@ h3 {
   color:black;
 }
 table.activeRecordSchemaTable{
+  background: #f2f2f2;
   border-collapse:collapse;
-  /*border:0;*/
 }
 table.activeRecordSchemaTable tr, table.activeRecordSchemaTable td{
   border:0;
@@ -88,17 +89,15 @@ table.activeRecordSchemaTable th{
   padding: 2px 4px 2px 4px;
 }
 
-.table.table-striped tr:nth-child(even) {background: #e6e6e6}
+/*.table.table-striped tr:nth-child(even) {background: #e6e6e6}
 .table.table-striped tr:nth-child(odd)  {background: #f2f2f2}
+*/
 
 
-
-.rendered_html h1{font-weight:normal;}
-.rendered_html h2{font-weight:normal;}
-.rendered_html h3{font-weight:normal;}
-.rendered_html h4{font-weight:normal;}
-.rendered_html h5{font-weight:normal;}
-.rendered_html h6{font-weight:normal;}
+.rendered_html h1,.rendered_html h2,.rendered_html h3,.rendered_html h4,.rendered_html h5{
+  font-weight:normal;
+  text-align: center;
+}
 
 
 div.cell.selected {
@@ -126,17 +125,17 @@ div.cell.selected {
   stroke-width: 1.5px;
 }
 
+.edgeLabel rect {
+    fill: #fff;
+}
+
 /*.node rect {
     stroke: #333;
     stroke-width: 1.5px;
     fill: #fff;
 }*/
 
-.edgeLabel rect {
-    fill: #fff;
-}
-
-.node div {
+/*.node div {
     border-radius: 5px;
 }
 
@@ -160,10 +159,4 @@ div.cell.selected {
 
 .node div.pass {
     padding: 5px;
-}
-
-.edgePath {
-    stroke: #333;
-    stroke-width: 1.5px;
-    fill: none;
-}
+}*/
