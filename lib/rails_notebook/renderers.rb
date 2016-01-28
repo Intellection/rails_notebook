@@ -24,46 +24,14 @@ module RailsNotebook
             HTML
         end
 
-        def self.render_routes( tree )
+        def self.render_html( object , functionName )
             <<-HTML
-            <svg id="routes-#{tree.object_id}" width="960" height="600"><g/></svg>
+            <div id="railsnb-#{object.object_id}"></div>
             <script>
-                require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
-                    railsNB.renderRoutes( #{MultiJson.dump(tree)} , document.getElementById( "routes-#{tree.object_id}" ) );
-                });
-            </script>
-            HTML
-        end
-
-        def self.html_flamechart( data )
-            <<-HTML
-            <div class=flamechart id="flamechart-#{data.object_id}" width="960" height="600"></div>
-            <script>
-                require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
-                    railsNB.renderFlamechart( #{MultiJson.dump(data)}, document.getElementById("flamechart-#{data.object_id}" ));
-                });
-            </script>
-            HTML
-        end
-
-        def self.render_schema( tables )
-        <<-HTML
-            <svg id="schema-#{tables.object_id}" width="960" height="600"><g/></svg>
-            <script>
-                require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
-                    railsNB.renderSchema( #{MultiJson.dump(tables)} , document.getElementById( "schema-#{tables.object_id}" ) );
-                });
-            </script>
-            HTML
-        end
-
-        def self.render_table_data( tableData )
-        <<-HTML
-            <div id="#{tableData.object_id}"><div>
-            <script>
-                require(["/kernelspecs/rails_notebook/rails_notebook.js"], function ( railsNB ) {
-                    railsNB.renderTableData( #{MultiJson.dump(tableData)} , document.getElementById( "#{tableData.object_id}" ) );
-                });
+            require(["/kernelspecs/rails_notebook/rails_notebook.js"] , function ( railsNB ) {
+                console.log( railsNB );
+                railsNB.#{functionName}( #{MultiJson.dump(object)} , document.getElementById( "railsnb-#{object.object_id}" ) );
+            }); 
             </script>
             HTML
         end
@@ -90,7 +58,6 @@ module RailsNotebook
         end
     end
 
-
     IRuby::Display::Registry.type { Array }
     IRuby::Display::Registry.format("text/html") do |array| 
         # Let rails do the heavy lifting
@@ -112,8 +79,7 @@ module RailsNotebook
 
     IRuby::Display::Registry.type { Profiler::Profile }
     IRuby::Display::Registry.format("text/html") do |profiledData|
-        #puts profiledData.inspect
-        Renderers.html_flamechart( profiledData )
+        Renderers.render_html( profiledData, "renderFlamechart" )
     end
 
     IRuby::Display::Registry.type { ActionDispatch::Routing::RouteSet }
@@ -131,8 +97,8 @@ module RailsNotebook
                 routeTree.insertNode( routeNode )
             end
         end
-        # routeTree.printTree()
-        Renderers.render_routes( routeTree )
+        # routeTree.printTree() # for debugging
+        Renderers.render_html( routeTree, "renderRoutes" )
     end
 
     IRuby::Display::Registry.type { ActiveRecord::Base.connection.tables }
@@ -162,7 +128,7 @@ module RailsNotebook
             tables.push(Table.new(table_name , columnsTemp , arrowsTo ))
         end # end iterating through tables
         tables = tables.sort_by { |x| x.arrowsTo.length }
-        Renderers.render_schema( tables ) # Parses the array of tables to Javascript for rendering
+        Renderers.render_html( tables, "renderSchema" ) # Parses the array of tables to Javascript for rendering
     end
 
     IRuby::Display::Registry.type { ActiveRecord::Relation}
@@ -181,7 +147,7 @@ module RailsNotebook
             end
             tableData.push(tempValues)
         end
-        Renderers.render_table_data( tableData )
+        Renderers.render_html( tableData, "renderTableData" )
     end # DatabaseQueries
 
 end
