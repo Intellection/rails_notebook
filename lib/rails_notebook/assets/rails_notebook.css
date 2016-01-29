@@ -95,6 +95,12 @@ table.activeRecordSchemaTable th{
   padding: 2px 4px 2px 4px;
 }
 
+.domain{
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px
+}
+
 /*.table.table-striped tr:nth-child(even) {background: #e6e6e6}
 .table.table-striped tr:nth-child(odd)  {background: #f2f2f2}
 */
