@@ -17,7 +17,5 @@ gem 'byebug', group: [:development, :test]
 
 #gem 'pry-byebug', group: [:development, :test]
 
-gem 'stackprof'
+#gem 'stackprof'
 #gem 'pry'
-
-gem 'rbczmq'

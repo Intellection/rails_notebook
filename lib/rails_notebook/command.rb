@@ -9,7 +9,9 @@ module RailsNotebook
       ipython_dir = ENV['IPYTHONDIR'] || '~/.ipython'
       @kernel_dir  = File.join(File.expand_path(ipython_dir), 'kernels', 'rails_notebook')
       @kernel_file = File.join(@kernel_dir, 'kernel.json')
+      puts @kernel_file
       @iruby_path  = File.expand_path $0
+      puts @iruby_path
     end
 
     def run_kernel
@@ -29,9 +31,7 @@ module RailsNotebook
       check_version
       check_registered_kernel
       change_working_dir
-
-      create_static_symlink!
-
+      #create_static_symlink!
       Kernel.exec('ipython', 'notebook')
     end
 
