@@ -10,8 +10,8 @@ body {
 }
 
 div.text_cell_render {
-    font-size: 16px;
-    font-weight: lighter;
+  font-size: 16px;
+  font-weight: lighter;
 }
 
 text {
@@ -32,13 +32,19 @@ g.type-noDisplay > rect {
 }
 
 table, th, td {
-	font-size: 16px;
+  font-size: 14px;
   border: 2px solid white;
   border-collapse: collapse;
   padding: 8px;
 }
 
 .toolTipTable h4 {
+  font-size: 16px;
+  font-weight:normal;
+  text-align: center;
+}
+
+.activeRecordSchema h3 {
   font-size: 16px;
   font-weight:normal;
   text-align: center;
@@ -92,8 +98,6 @@ table.activeRecordSchemaTable th{
 /*.table.table-striped tr:nth-child(even) {background: #e6e6e6}
 .table.table-striped tr:nth-child(odd)  {background: #f2f2f2}
 */
-
-
 .rendered_html h1,.rendered_html h2,.rendered_html h3,.rendered_html h4,.rendered_html h5{
   font-weight:normal;
   text-align: center;
@@ -101,14 +105,14 @@ table.activeRecordSchemaTable th{
 
 
 div.cell.selected {
-    background: #FDFCF8;
+  background: #FDFCF8;
 }
 
 .rendered_html code {
-    border: 1px solid #ddd;
-    background: #F5F5F5;
-    padding: 1px;
-    font-size: 85%;
+  border: 1px solid #ddd;
+  background: #F5F5F5;
+  padding: 1px;
+  font-size: 85%;
 }
 
 
@@ -128,35 +132,3 @@ div.cell.selected {
 .edgeLabel rect {
     fill: #fff;
 }
-
-/*.node rect {
-    stroke: #333;
-    stroke-width: 1.5px;
-    fill: #fff;
-}*/
-
-/*.node div {
-    border-radius: 5px;
-}
-
-.node .heading {
-    font-weight: bold;
-}
-
-.node .info {
-    font-size: 12px;
-}
-
-.node div.fail {
-    background-color: #e74c3c;
-    padding: 5px;
-}
-
-.node div.parallel {
-    background-color: #3498db;
-    padding: 5px;
-}
-
-.node div.pass {
-    padding: 5px;
-}*/
