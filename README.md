@@ -26,7 +26,10 @@ Running the notebook for the first time, requires the notebook to be marked as "
 
 ## Some useful commands:
 
-TODO: Add stuff here
+	Rails.application.routes
+	ActiveRecord::Base.connection.tables
+	Model.all
+	SchemaTable::bar_chart(Model.group(:column_name))
 
 # Developer Installation Guide
 Follow the following instructions to get rvm and ruby installed: https://rvm.io/rvm/install . The rails notebook is compatible with Ruby 2.2.1 and above. Once rvm is installed, run:
@@ -107,7 +110,12 @@ Finally, run the notebook again using:
     
     rake rails_notebook
 
-Useful commands: TODO: Add here
+## Some useful commands:
+
+	Rails.application.routes
+	ActiveRecord::Base.connection.tables
+	Customer.all
+	SchemaTable::bar_chart(Order.group(:status))
 
 ## Why does Rails_notebook exist?
 
