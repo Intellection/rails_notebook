@@ -8,6 +8,7 @@ class RouteNode
 		@countChildrenNodes = 0
 		@childrenNodes = []
 		@nodeUri = _nodeUri
+		@id = self.object_id
 	end
 	def updateParams( _verb , _controller , _action )
 		@verbs << _verb unless _verb.nil?

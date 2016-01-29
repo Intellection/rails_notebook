@@ -10,12 +10,12 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem 'rspec-rails', group: [:development, :test]
+gem 'rspec-rails', 	group: [:development, :test]
+gem 'byebug', 		group: [:development, :test]
+gem 'pry-byebug', 	group: [:development, :test]
 
-# To use a debugger
-gem 'byebug', group: [:development, :test]
-
-#gem 'pry-byebug', group: [:development, :test]
-
-#gem 'stackprof'
-#gem 'pry'
+group :pry do
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'awesome_print'
+end

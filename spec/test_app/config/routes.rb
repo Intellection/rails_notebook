@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   		resources :articles do
   			resources :comments
   		end
-  		resources :customer do
+  		resources :customers do
   			resources :invoices
-  			resources :orders
+  			resources :orders do
+          resources :products
+        end
   			resources :comments
   		end
   		root 'welcome#index'
