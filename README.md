@@ -2,7 +2,7 @@
 
 Welcome to Rails Notebook! Rails Notebook is a web-based notebook environment for interactive computing, specifically geared for Ruby on Rails.
 
-## Installation
+## User Installation Guide
 
 Add this line to your application's Gemfile:
 
@@ -11,39 +11,98 @@ Add this line to your application's Gemfile:
 And then execute:
 
 	$ bundle
+	$ bundle update
 
 Make sure there is no ~/Library/Jupyter/kernels directory. If there is, make sure this is removed before running.
 
 Please ensure that the following dependencies are installed prior to running the Rails Notebook.
 
-1) ipython - 4.0.2
+    ipython 3.0.0 and above, ruby 2.2.1p85 and above
+    Python 2.7.11 (Rails Notebook not compatible with Python 3)
 
-2) Rails - 4.2.5
-
-3) conda 3.19.0
-
-4) ruby 2.2.1p85
-
-5) sqlite 3.9.2
-
-6) Anaconda 2.1.0
-
-7) Python 2.7.11 (comes with Anaconda 2.1.0)
-
-
-ZeroMQ is a high-performance asynchronous messaging library, aimed at use in scalable distributed or concurrent applications.
-
-Install via Homebrew:
-
-	$ brew tap homebrew/versions
-
-	$ brew install zeromq
-
-Run to start the notebook navigate to the root of the Rails application and run:
+To start the notebook navigate to the root of the Rails application and run:
 
     rake rails_notebook
 
-Also ensure that the notebook is marked as a "Trusted" under File > Trusted Notebook. You may be prompted to restart the notebook.
+Running the notebook for the first time, requires the notebook to be marked as "Trusted" under File > Trusted Notebook. You may be prompted to restart the notebook.
+
+## Developer Installation Guide
+Follow the following instructions to get rvm and ruby installed: https://rvm.io/rvm/install . The rails notebook is compatible with Ruby 2.2.1 and above. Once rvm is installed, run:
+
+    rvm install ruby 2.2.1 (or greater)
+
+Ensure that rvm is using the correct ruby version by running:
+
+    ruby --version 
+    -> 2.2.1p85
+
+If this is the incorrect version, run:
+    
+    rvm use ruby 2.2.1
+    
+Next, from https://repo.continuum.io/archive/index.html, download Anaconda 2.4.1. Ensure that "Anaconda2" is precedes the file name (for Python 2.7)
+    
+    e.g., for MacOSX: Anaconda2-2.4.1-MacOSX-x86_64.sh (PYTHON 2.7 NB)
+
+To install Anaconda, navigate to the directory with the downloaded .sh file and run:
+
+    bash Anaconda2-2.4.1-MacOSX-x86_64.sh
+
+Next, ensure that Anaconda is added to your PATH variable by adding the following line to ~/.bash_profile:
+    
+    export PATH="/Path/To../anaconda2/bin:$PATH"
+
+Restart the terminal before proceeding.
+
+# Validating your environment
+
+To ensure that the correct dependencies have been installed, run the following:
+
+    which anaconda 
+    > /Path/To../bin/anaconda
+    which python 
+    > /Path/To../anaconda/bin/python
+    python --version 
+    > 2.7.11, Anaconda 2.4.1
+
+If the above are incorrect, you likely need to update your PATH variable in ~/.bash_profile and restart the terminal.
+
+# Almost there:
+
+Next, clone the Rails_notebook repository by running:
+
+    git clone https://github.com/Intellection/rails_notebook.git /Path/To../rails_notebook
+    cd /Path/To../rails_notebook
+
+Then install the required gems (this may take some time):
+    
+    gem install bundler
+    bundle install
+    bundle update
+
+Don't worry about the "WARNING:  Unable to pull data from ..."
+
+Open lib/rails_notebook/command.rb with your editor and uncomment (line 32):
+    
+    # create_static_symlink!
+
+Save and exit.
+
+# Test your installation
+The repository comes with an example Rails application. To test the Rails Notebook, change to the test_app directory located under spec/test_app and run:
+
+    rake db:reset db:seed
+    rake_rails_notebook
+
+Open the railsNotebook.ipynb notebook. Upon the first time running the notebook select "Trust Notebook" via:
+    
+    File > Trust Notebook
+    
+Then restart the notebook via the Terminal (CTRL+C twice)
+
+Finally, run the notebook again using:
+    
+    rake rails_notebook
 
 ## Why does Rails_notebook exist?
 
