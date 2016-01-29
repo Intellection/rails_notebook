@@ -8,28 +8,30 @@ Add this line to your application's Gemfile:
 
     gem 'rails_notebook'
 
-And then execute:
+And then execute the following from the rool of your Rails application:
 
 	$ bundle
 	$ bundle update
 
-Make sure there is no ~/Library/Jupyter/kernels directory. If there is, make sure this is removed before running.
-
 Please ensure that the following dependencies are installed prior to running the Rails Notebook.
 
-    ipython 3.0.0 and above, ruby 2.2.1p85 and above
+    ipython 3.0.0 and above, ruby 2.2.1 and above
     Python 2.7.11 (Rails Notebook not compatible with Python 3)
 
-To start the notebook navigate to the root of the Rails application and run:
+To start the notebook navigate to the root of the Rails application (if not already) and run:
 
     rake rails_notebook
 
 Running the notebook for the first time, requires the notebook to be marked as "Trusted" under File > Trusted Notebook. You may be prompted to restart the notebook.
 
-## Developer Installation Guide
+## Some useful commands:
+
+TODO: Add stuff here
+
+# Developer Installation Guide
 Follow the following instructions to get rvm and ruby installed: https://rvm.io/rvm/install . The rails notebook is compatible with Ruby 2.2.1 and above. Once rvm is installed, run:
 
-    rvm install ruby 2.2.1 (or greater)
+    rvm install ruby 2.2.1
 
 Ensure that rvm is using the correct ruby version by running:
 
@@ -48,13 +50,15 @@ To install Anaconda, navigate to the directory with the downloaded .sh file and 
 
     bash Anaconda2-2.4.1-MacOSX-x86_64.sh
 
+Make sure there is no ~/Library/Jupyter/kernels directory. If there is, make sure this is removed before running.
+
 Next, ensure that Anaconda is added to your PATH variable by adding the following line to ~/.bash_profile:
     
     export PATH="/Path/To../anaconda2/bin:$PATH"
 
 Restart the terminal before proceeding.
 
-# Validating your environment
+## Validating your environment
 
 To ensure that the correct dependencies have been installed, run the following:
 
@@ -67,7 +71,7 @@ To ensure that the correct dependencies have been installed, run the following:
 
 If the above are incorrect, you likely need to update your PATH variable in ~/.bash_profile and restart the terminal.
 
-# Almost there:
+## Almost there:
 
 Next, clone the Rails_notebook repository by running:
 
@@ -80,7 +84,6 @@ Then install the required gems (this may take some time):
     bundle install
     bundle update
 
-Don't worry about the "WARNING:  Unable to pull data from ..."
 
 Open lib/rails_notebook/command.rb with your editor and uncomment (line 32):
     
@@ -88,11 +91,11 @@ Open lib/rails_notebook/command.rb with your editor and uncomment (line 32):
 
 Save and exit.
 
-# Test your installation
+## Test your installation
 The repository comes with an example Rails application. To test the Rails Notebook, change to the test_app directory located under spec/test_app and run:
 
     rake db:reset db:seed
-    rake_rails_notebook
+    rake rails_notebook
 
 Open the railsNotebook.ipynb notebook. Upon the first time running the notebook select "Trust Notebook" via:
     
@@ -103,6 +106,8 @@ Then restart the notebook via the Terminal (CTRL+C twice)
 Finally, run the notebook again using:
     
     rake rails_notebook
+
+Useful commands: TODO: Add here
 
 ## Why does Rails_notebook exist?
 
