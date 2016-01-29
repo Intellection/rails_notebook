@@ -26,9 +26,20 @@ Running the notebook for the first time, requires the notebook to be marked as "
 
 ## Some useful commands:
 
+To display the application's routes:
+
 	Rails.application.routes
+
+To view an ER diagram of the current database:
+
 	ActiveRecord::Base.connection.tables
-	Model.all
+
+To query the top 10 records of a table:
+
+	table_name.all
+
+To graph a group query into a bar chart:
+
 	SchemaTable::bar_chart(Model.group(:column_name))
 
 # Developer Installation Guide
@@ -112,9 +123,20 @@ Finally, run the notebook again using:
 
 ## Some useful commands:
 
+To display the application's routes:
+
 	Rails.application.routes
+
+To view an ER diagram of the current database:
+
 	ActiveRecord::Base.connection.tables
+
+To query the top 10 records of a table:
+
 	Customer.all
+
+To graph a group query into a bar chart:
+
 	SchemaTable::bar_chart(Order.group(:status))
 
 ## Why does Rails_notebook exist?
