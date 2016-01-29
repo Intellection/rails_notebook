@@ -30,6 +30,18 @@ Please ensure that the following dependencies are installed prior to running the
 
 7) Python 2.7.11 (comes with Anaconda 2.1.0)
 
+
+ZeroMQ is a high-performance asynchronous messaging library, aimed at use in scalable distributed or concurrent applications.
+
+Install via Homebrew:
+
+	$ brew tap homebrew/versions
+
+	$ brew install zeromq32
+
+	$ gem install ffi-rzmq
+
+
 Run to start the notebook navigate to the root of the Rails application and run:
 
     rake rails_notebook
