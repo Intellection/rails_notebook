@@ -68,7 +68,7 @@ module RailsNotebook
     IRuby::Display::Registry.type { ActionDispatch::Routing::RouteSet }
     IRuby::Display::Registry.format("text/html") do |route_set|
         all_routes = route_set.routes.to_a
-        all_routes.reject! { |route| route.verb.nil? || route.path.spec.to_s == '/assets' }
+        all_routes.reject! { |route| route.verb.nil? || route.path.spec.to_s == '/assets' || ( route.path.spec.to_s =~ /^\/rails(.*)/ ) || route.path.spec.to_s =~ /^\/pages(.*)/ }
         routeTree = RouteTree.new( RouteNode.new( "/" , nil, nil, nil, "" ) )
         all_routes.group_by { |route| route.defaults[:controller] }.each_value do |group|
             group.each do |r|
@@ -80,7 +80,7 @@ module RailsNotebook
                 routeTree.insertNode( routeNode )
             end
         end
-        # routeTree.printTree() # for debugging
+        #routeTree.printTree() # for debugging
         Renderers.render_html( routeTree, "renderRoutes" )
     end
 
