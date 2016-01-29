@@ -1,6 +1,7 @@
 #https://github.com/SamSaffron/flamegraph/
 #Modified from Sam Saffron's original code for flamegraph
 require "json"
+require "stackprof"
 
 module Profiler
     def self.profile(filename=nil, opts = {})
