@@ -1,6 +1,6 @@
 ## Rails notebook
 
-Welcome to Rails Notebook! Rails Notebook is a web-based notebook environment for interactive computing, specifically geared for Ruby on Rails.
+Welcome to Rails Notebook! Rails Notebook is a web-based notebook environment for interactive computing, specifically geared for Ruby on Rails. It currently consists of several visualization tools for database queries and a performance analysis flame chart. 
 
 ## User Installation Guide
 
@@ -8,21 +8,21 @@ Add this line to your application's Gemfile:
 
     gem 'rails_notebook'
 
-And then execute the following from the rool of your Rails application:
+And then execute the following from the root of your Rails application:
 
 	$ bundle
 	$ bundle update
 
 Please ensure that the following dependencies are installed prior to running the Rails Notebook.
 
-    ipython 3.0.0 and above, ruby 2.2.1 and above
-    Python 2.7.11 (Rails Notebook not compatible with Python 3)
+    ipython 3.0.0 or above, ruby 2.2.1 or above
+    Python 2.7.11 (Rails Notebook is not compatible with Python 3)
 
 To start the notebook navigate to the root of the Rails application (if not already) and run:
 
     rake rails_notebook
 
-Running the notebook for the first time, requires the notebook to be marked as "Trusted" under File > Trusted Notebook. You may be prompted to restart the notebook.
+When running the notebook for the first time, the notebook required to be marked as "Trusted" under File > Trusted Notebook. You may be prompted to restart the notebook.
 
 ## Some useful commands:
 
@@ -34,16 +34,16 @@ To view an ER diagram of the current database:
 
 	ActiveRecord::Base.connection.tables
 
-To query the top 10 records of a table:
+To query the top 10 records of a table (default limits to 10):
 
 	table_name.all
 
-To graph a group query into a bar chart:
+To graph a database group_by query into a bar chart:
 
 	SchemaTable::bar_chart(Model.group(:column_name))
 
 # Developer Installation Guide
-Follow the following instructions to get rvm and ruby installed: https://rvm.io/rvm/install . The rails notebook is compatible with Ruby 2.2.1 and above. Once rvm is installed, run:
+Follow the instructions in the following link to get rvm and ruby installed: https://rvm.io/rvm/install . The rails notebook is only compatible with Ruby 2.2.1 and above. Once rvm is installed, run:
 
     rvm install ruby 2.2.1
 
@@ -56,7 +56,7 @@ If this is the incorrect version, run:
     
     rvm use ruby 2.2.1
     
-Next, from https://repo.continuum.io/archive/index.html, download Anaconda 2.4.1. Ensure that "Anaconda2" is precedes the file name (for Python 2.7)
+Next, navigate to https://repo.continuum.io/archive/index.html, and download Anaconda 2.4.1. Ensure that "Anaconda2" is precedes the file name (for Python 2.7)
     
     e.g., for MacOSX: Anaconda2-2.4.1-MacOSX-x86_64.sh (PYTHON 2.7 NB)
 
@@ -64,11 +64,11 @@ To install Anaconda, navigate to the directory with the downloaded .sh file and 
 
     bash Anaconda2-2.4.1-MacOSX-x86_64.sh
 
-Make sure there is no ~/Library/Jupyter/kernels directory. If there is, make sure this is removed before running.
+Make sure the directory, ~/Library/Jupyter/kernels is empty. If it exists, make sure this is removed before running the Rails Notebook.
 
-Next, ensure that Anaconda is added to your PATH variable by adding the following line to ~/.bash_profile:
+Next, ensure that Anaconda is added to your PATH variable by adding the following line to your ~/.bash_profile:
     
-    export PATH="/Path/To../anaconda2/bin:$PATH"
+    export PATH="/Path/To/../anaconda2/bin:$PATH"
 
 Restart the terminal before proceeding.
 
@@ -77,22 +77,22 @@ Restart the terminal before proceeding.
 To ensure that the correct dependencies have been installed, run the following:
 
     which anaconda 
-    > /Path/To../bin/anaconda
+    -> /Path/To/../bin/anaconda
     which python 
-    > /Path/To../anaconda/bin/python
+    -> /Path/To/../anaconda/bin/python
     python --version 
-    > 2.7.11, Anaconda 2.4.1
+    -> 2.7.11, Anaconda 2.4.1
 
-If the above are incorrect, you likely need to update your PATH variable in ~/.bash_profile and restart the terminal.
+If the above are incorrect, you likely need to update your PATH variable in your ~/.bash_profile to point towards the correct Python installation, and thereafter restart the terminal before continuing.
 
 ## Almost there:
 
 Next, clone the Rails_notebook repository by running:
 
-    git clone https://github.com/Intellection/rails_notebook.git /Path/To../rails_notebook
-    cd /Path/To../rails_notebook
+    git clone https://github.com/Intellection/rails_notebook.git /Path/To/../rails_notebook
+    cd /Path/To/../rails_notebook
 
-Then install the required gems (this may take some time):
+Install the required gems (this may take some time):
     
     gem install bundler
     bundle install
@@ -115,15 +115,15 @@ Open the railsNotebook.ipynb notebook. Upon the first time running the notebook 
     
     File > Trust Notebook
     
-Then restart the notebook via the Terminal (CTRL+C twice)
+Then restart the notebook via the Terminal (CTRL+C twice to stop the kernel)
 
-Finally, run the notebook again using:
+Finally, rerun the notebook again using:
     
     rake rails_notebook
 
 ## Some useful commands:
 
-To display the application's routes:
+To display the Rails application's routes:
 
 	Rails.application.routes
 
@@ -131,11 +131,11 @@ To view an ER diagram of the current database:
 
 	ActiveRecord::Base.connection.tables
 
-To query the top 10 records of a table:
+To query the top 10 records of a table (default limits to 10):
 
 	Customer.all
 
-To graph a group query into a bar chart:
+To graph a database group_by query into a bar chart:
 
 	SchemaTable::bar_chart(Order.group(:status))
 
