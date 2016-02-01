@@ -32,7 +32,7 @@ module RailsNotebook
         begin JSON.parse( string )
             Renderers.pretty_print_json( string )
         rescue
-            String
+            string
         end
     end
 
