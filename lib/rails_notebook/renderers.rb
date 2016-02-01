@@ -88,7 +88,6 @@ module RailsNotebook
     IRuby::Display::Registry.format("text/html") do |obj|
         tables = [] # List of Table objects
         tableNames = [] # List of table names
-
         obj.each do |table_name|
             tableNames.push(table_name.singularize.foreign_key)
         end # Populates table names
@@ -99,7 +98,7 @@ module RailsNotebook
             ActiveRecord::Base.connection.columns(table_name).each do |c|
                 columnTemp = []
                 if (tableNames.include? c.name)
-                    arrowsTo.push(c.name.humanize.pluralize.downcase)
+                    arrowsTo.push(c.name[0..-4].pluralize.downcase) # [0..-4] chops off the _id suffix for foreign keys. .humanize renmoves existing underscores, which causes bugs.
                     columnTemp.push("* " + c.name)
                     columnTemp.push(c.type.to_s)
                 else 
