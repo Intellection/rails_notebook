@@ -2,6 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
 require "rails_notebook/version"
+require 'date'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
@@ -20,7 +21,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.2.1'
 
-  s.add_dependency "rails", "~> 4.2.5"
+  s.add_dependency "rails", ">= 5.0.0"
   s.add_dependency "iruby"
   s.add_dependency "rbczmq"
   s.add_dependency "stackprof"

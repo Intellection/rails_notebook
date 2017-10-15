@@ -31,7 +31,7 @@ module RailsNotebook
       check_version
       check_registered_kernel
       change_working_dir
-      #create_static_symlink!
+      create_static_symlink!
       Kernel.exec('ipython', 'notebook')
     end
 
